@@ -1,1 +1,3 @@
-console.log('Hello Node.js project.');
+import 'dotenv/config';
+
+console.log(process.env.MY_SECRET);
