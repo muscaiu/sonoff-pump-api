@@ -13,50 +13,48 @@ app.use(express.urlencoded({ extended: true }));
 app.use(async (req, res, next) => {
   req.context = {
     models,
-    me: await models.User.findByLogin('rwieruch'),
+    me: await models.User.findByLogin('admin'),
   };
   next();
 });
 
-app.use('/session', routes.session);
-app.use('/users', routes.user);
-app.use('/messages', routes.message);
-
-const eraseDatabaseOnSync = true;
+app.use('/api/session', routes.session);
+app.use('/api/users', routes.user);
+app.use('/api/messages', routes.message);
+app.use('/api/mode', routes.mode);
+app.use('/api/status', routes.status);
 
 const createUsersWithMessages = async () => {
   const user1 = new models.User({
-    username: 'rwieruch',
-  });
-  const user2 = new models.User({
-    username: 'ddavids',
+    username: 'admin',
+    password: 'orhideelor'
   });
   const message1 = new models.Message({
-    text: 'Published the Road to learn React',
+    text: 'wtf message',
     user: user1.id,
   });
-  const message2 = new models.Message({
-    text: 'Happy to release ...',
-    user: user2.id,
+  const mode1 = new models.Mode({
+    value: 'manual',
   });
-  const message3 = new models.Message({
-    text: 'Published a complete ...',
-    user: user2.id,
+  const status1 = new models.Status({
+    value: true,
   });
   await message1.save();
-  await message2.save();
-  await message3.save();
   await user1.save();
-  await user2.save();
+  await mode1.save();
+  await status1.save();
 };
 
+const eraseDatabaseOnSync = true;
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {
     await Promise.all([
       models.User.deleteMany({}),
       models.Message.deleteMany({}),
+      models.Mode.deleteMany({}),
+      models.Status.deleteMany({}),
     ])
-      .then(() => console.log('DB erased succesfully'));
+      .then(() => console.log('DB refreshed'));
 
     createUsersWithMessages();
   }
@@ -65,5 +63,3 @@ connectDb().then(async () => {
     console.log(`API running on http://localhost:${process.env.PORT}`),
   );
 });
-
-

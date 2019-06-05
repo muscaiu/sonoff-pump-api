@@ -14,4 +14,14 @@ router.get('/:userId', async (req, res) => {
   return res.send(user);
 });
 
+router.post('/auth', async (req, res) => {
+  const users = await req.context.models.User.find();
+  const user = users.find(dbUser =>
+    dbUser.username === req.body.username &&
+    dbUser.password === req.body.password)
+
+  if (user) return res.send(true);
+  return res.send(false)
+});
+
 export default router;

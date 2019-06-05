@@ -5,13 +5,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  password: {
+    type: String
+  },
 });
 
 
 userSchema.statics.findByLogin = async function (login) {
-  let user = await this.findOne({
-    username: login,
-  });
+  let user = await this.findOne({ username: login });
 
   if (!user) {
     user = await this.findOne({ email: login });
@@ -20,7 +21,7 @@ userSchema.statics.findByLogin = async function (login) {
   return user;
 };
 
-userSchema.pre('remove', function(next) {
+userSchema.pre('remove', function (next) {
   this.model('Message').deleteMany({ user: this._id }, next);
 });
 
