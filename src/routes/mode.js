@@ -19,6 +19,7 @@ router.post('/create', async (req, res) => {
     value: req.body.value,
     // user: req.context.me.id
   })
+  console.log(mode)
 
   return res.send(mode);
 });

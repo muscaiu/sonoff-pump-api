@@ -23,6 +23,7 @@ app.use('/api/users', routes.user);
 app.use('/api/messages', routes.message);
 app.use('/api/mode', routes.mode);
 app.use('/api/status', routes.status);
+app.use('/api/temperature', routes.temperature);
 
 const createUsersWithMessages = async () => {
   const user1 = new models.User({
@@ -45,7 +46,7 @@ const createUsersWithMessages = async () => {
   await status1.save();
 };
 
-const eraseDatabaseOnSync = true;
+const eraseDatabaseOnSync = false;
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {
     await Promise.all([

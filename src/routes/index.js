@@ -3,6 +3,7 @@ import user from './user';
 import message from './message';
 import mode from './mode';
 import status from './status';
+import temperature from './temperature';
 
 export default {
   session,
@@ -10,4 +11,5 @@ export default {
   message,
   mode,
   status,
+  temperature,
 };
