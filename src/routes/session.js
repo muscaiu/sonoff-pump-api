@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { pompadb } from '../models';
 
 const router = Router();
 

@@ -20,8 +20,16 @@ async function pompaSonoff() {
     })
   }
   catch (err) {
-   console.log(err);
+    console.log(err);
   }
 }
 
+function turnOn() {
+  axios.get('http://192.168.1.11/cm?cmnd=Power%20On')
+}
+function turnOff() {
+  axios.get('http://192.168.1.11/cm?cmnd=Power%20off')
+}
+
 export default pompaSonoff;
+export { turnOn, turnOff };
