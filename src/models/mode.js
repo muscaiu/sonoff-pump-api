@@ -1,16 +1,13 @@
-import mongoose from 'mongoose';
-
-const modeSchema = new mongoose.Schema({
-  value: {
-    type: String,
-    required: true,
-  },
-},
-  {
-    timestamps: true
+const mode = (sequelize, DataTypes) => {
+  const Mode = sequelize.define('mode', {
+    value: DataTypes.STRING,
   });
 
-const Mode = mongoose.model('Mode', modeSchema);
+  // Mode.associate = models => {
+  //   Mode.belongsTo(models.User);
+  // };
 
+  return Mode;
+};
 
-export default Mode;
+export default mode;

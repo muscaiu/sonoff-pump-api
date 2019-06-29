@@ -23,19 +23,7 @@ router.post('/auth', async (req, res) => {
 
   // if (user) return res.send(true);
   // return res.send(false)
-
-  pompadb.find({
-    selector: {
-      type: { "$eq": "pass" }
-    },
-    fields: ["pass"],
-  }).then((docs) => {
-    const pass = docs.docs[docs.docs.length - 1];
-    if (req.body.password === pass.pass) {
-      return res.send(true);
-    }
-    res.send(false);
-  });
+  res.send(true);
 });
 
 export default router;

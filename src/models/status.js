@@ -1,16 +1,9 @@
-import mongoose from 'mongoose';
-
-const statusSchema = new mongoose.Schema({
-  value: {
-    type: Boolean,
-    required: true,
-  },
-},
-  {
-    timestamps: true
+const status = (sequelize, DataTypes) => {
+  const Status = sequelize.define('status', {
+    value: DataTypes.BOOLEAN,
   });
 
-const Status = mongoose.model('Status', statusSchema);
+  return Status;
+};
 
-
-export default Status;
+export default status;
