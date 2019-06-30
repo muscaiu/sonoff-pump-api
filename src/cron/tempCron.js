@@ -1,17 +1,15 @@
+import pompaSonoff from '../sonoffs/pompaSonoff';
+import models from '../models';
+
 const CronJob = require('cron').CronJob;
 
-import pompaSonoff from '../sonoffs/pompaSonoff';
-import { pompadb } from '../models';
-
 //Hourly Temp and Status
-const tempCron = new CronJob(`0 0 * * * *`, function () {
+const tempCron = new CronJob(`0 0 * * * *`, async function () {
   pompaSonoff()
-    .then(data => {
-      pompadb.insert({
-        ...data,
-        createdAt: new Date(),
-        type: 'temperature'
-      })
+    .then(async data => {
+      await models.Temperature.create({
+        value: data.temperature,
+      });
     })
 });
 
