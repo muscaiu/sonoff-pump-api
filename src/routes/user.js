@@ -9,7 +9,6 @@ router.post('/create', async (req, res) => {
     password: req.body.password,
   });
 
-  console.log('users:', users)
   console.log('user:', user)
   if (user) return res.send(true);
   return res.send(false)
@@ -24,7 +23,7 @@ router.post('/auth', async (req, res) => {
   const user = users.find(dbUser =>
     dbUser.username === req.body.username &&
     dbUser.password === req.body.password)
-
+    
   console.log('user:', user)
   if (user) return res.send(true);
   return res.send(false)
