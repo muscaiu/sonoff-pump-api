@@ -14,6 +14,7 @@ const models = {
   Mode: sequelize.import('./mode'),
   Status: sequelize.import('./status'),
   Temperature: sequelize.import('./temperature'),
+  User: sequelize.import('./user'),
 };
 
 // Object.keys(models).forEach(key => {

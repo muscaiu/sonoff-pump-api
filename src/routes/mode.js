@@ -21,11 +21,4 @@ router.post('/create', async (req, res) => {
   return res.send(mode);
 });
 
-// router.get('/:messageId', async (req, res) => {
-//   const message = await req.context.models.Message.findByPk(
-//     req.params.messageId,
-//   );
-//   return res.send(message);
-// });
-
 export default router;

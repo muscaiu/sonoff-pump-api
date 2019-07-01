@@ -31,7 +31,7 @@ router.post('/create', async (req, res) => {
     value: req.body.value,
   });
 
-  // status.value ? turnOn() : turnOff()
+  status.value ? turnOn() : turnOff()
 
   return res.send(status);
 });

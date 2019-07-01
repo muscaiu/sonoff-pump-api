@@ -15,7 +15,7 @@ const startTime = new CronJob(`00 ${customMinute} ${customHour} * * *`, async fu
       value: true,
       startedBy: 'cron'
     });
-    // axios.get('http://192.168.1.11/cm?cmnd=Power%20On')
+    axios.get('http://192.168.1.11/cm?cmnd=Power%20On')
     console.log('pompa started by cron');
   } else {
     console.log('cant start auto because is currently in manual mode');
@@ -29,7 +29,7 @@ const stopTime = new CronJob(`00 ${customMinute} ${customHour + 1} * * *`, async
       value: false,
       startedBy: 'cron'
     });
-    // axios.get('http://192.168.1.11/cm?cmnd=Power%20off')
+    axios.get('http://192.168.1.11/cm?cmnd=Power%20off')
     console.log('pompa stopped by cron');
   } else {
     console.log('cant stop auto because is currently in manual mode');

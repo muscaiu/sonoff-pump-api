@@ -2,23 +2,22 @@ import axios from 'axios';
 
 async function pompaSonoff() {
   try {
-    // let res = await axios({
-    //   url: 'http://192.168.1.11/ay',
-    //   method: 'get',
-    //   timeout: 10000,
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   }
-    // })
-    // const parseStatus = res.data.split('px\'>')
-    // const status = parseStatus[1].split('</div')[0]
-    // const parseTemperatureHumidity = res.data.split('{m}')
-    // const temperature = parseInt(parseTemperatureHumidity[1].split('&')[0])
+    let res = await axios({
+      url: 'http://192.168.1.11/ay',
+      method: 'get',
+      timeout: 10000,
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    const parseStatus = res.data.split('px\'>')
+    const status = parseStatus[1].split('</div')[0]
+    const parseTemperatureHumidity = res.data.split('{m}')
+    const temperature = parseInt(parseTemperatureHumidity[1].split('&')[0])
+    console.log(status, temperature)
     return ({
-      // status,
-      // temperature,
-      status: true,
-      temperature: 25,
+      status,
+      temperature,
     })
   }
   catch (err) {
