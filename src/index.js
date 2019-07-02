@@ -8,6 +8,10 @@ import routes from './routes';
 import { startTime, stopTime } from './cron/statusCron';
 import tempCron from './cron/tempCron';
 
+startTime.start();
+stopTime.start();
+tempCron.start()
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -26,9 +30,6 @@ app.use('/api/users', routes.user);
 app.use('/api/status', routes.status);
 app.use('/api/temperature', routes.temperature);
 // app.use('/api/session', routes.session);
-startTime.start();
-stopTime.start();
-tempCron.start()
 
 sequelize.sync().then(async () => {
   console.log('+++ DB connected')
