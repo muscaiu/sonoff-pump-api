@@ -4,9 +4,8 @@ const router = Router();
 
 router.get('/list', async (req, res) => {
   const temperatures = await req.context.models.Temperature.findAll({
-    // limit: 100,
-    // where: {},
-    order: [['createdAt', 'ASC']]
+    limit: 30,
+    order: [['createdAt', 'DESC']]
   })
   return res.send(temperatures);
 });

@@ -4,16 +4,20 @@ import pompaSonoff, { turnOn, turnOff } from '../sonoffs/pompaSonoff';
 const router = Router();
 
 router.get('/', async (req, res) => {
-  pompaSonoff().then(async data => {
-    const { temperature } = data;
-    const status = await req.context.models.Status.findAll({
-      limit: 1,
-      where: {},
-      order: [['createdAt', 'DESC']]
-    })
-    const fullStatus = { status: status[0], temperature }
-    return res.send(fullStatus);
+  // pompaSonoff().then(async data => {
+  const statuses = await req.context.models.Status.findAll({
+    limit: 1,
+    where: {},
+    order: [['createdAt', 'DESC']]
   })
+  const temperatures = await req.context.models.Temperature.findAll({
+    limit: 1,
+    where: {},
+    order: [['createdAt', 'DESC']]
+  })
+  const fullStatus = { status: statuses[0], temperature: temperatures[0].value }
+  return res.send(fullStatus);
+  // })
 });
 
 router.get('/list', async (req, res) => {

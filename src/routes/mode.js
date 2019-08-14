@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
     order: [['createdAt', 'DESC']]
   })
   return res.send(mode[0]);
-
 });
 
 router.post('/create', async (req, res) => {
